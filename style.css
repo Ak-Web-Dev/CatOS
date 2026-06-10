@@ -1,0 +1,124 @@
+.bdone {--bd: url("Assets/1.png");}
+.bdtwo {--bd: url("Assets/2.png");}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    background-image: var(--bd);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-size: cover;
+}
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: lightgrey;
+    padding: 10px;
+    display: flex;
+    align-items: left;
+}
+.start-menu {
+    position: fixed;
+    bottom: -200px;
+    left: 10px;
+    width: 250px;
+    background: rgba(201, 201, 201, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: none;
+    text-align: center;
+    transition: bottom 0.3s ease-in-out;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+    text-align: center;
+}
+.button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: centre;
+    font-weight: bold;
+    width: 90%;
+}
+.btn {
+    display: block;
+    margin: 1px;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: centre;
+    font-weight: bold;
+    width: 7%;
+    margin-right: 95%;
+}
+.button:hover, .btn:hover {
+    background: #0056b3;
+}
+.dark-theme {
+    background-color: rgb(77, 77, 77);
+    color: white;
+}
+.dark-theme .popup {
+    background-color: gray;
+    color: white;
+}
+.dark-theme .navbar, .dark-theme .start-menu{
+    background-color: rgb(37, 37, 37);
+    color: white;
+}
+.close {
+    margin-left: 90%;
+    border-radius: 50%;
+    background-color: red;
+    border: 1px solid black;
+    transition: 0.3s;
+}
+.close:hover{
+    background-color: rgb(202, 0, 0);
+    cursor: pointer;
+}
+a {color: rgb(0, 173, 173);}
+#num1 {margin-bottom: 5px;}
+.ico {width: 200px;}
+
+@media screen and (max-width: 800px){
+    .btn {
+        display: block;
+        margin: 1px;
+        padding: 10px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: centre;
+        font-weight: bold;
+        width: 24%;
+        margin-right: 76%;
+    }
+}
+body {
+    background-color: black;
+    background-repeat: round;
+}

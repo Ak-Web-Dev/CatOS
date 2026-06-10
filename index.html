@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="Assets/ico.png" type="image/x-icon">
+</head>
+<body>
+    <div class="navbar">
+        <button class="btn" onclick="toggleStartMenu()">🕹️ Start</button>
+    </div>
+    <div id="startMenu" class="start-menu">
+        <h3><u>Start Menu</u></h3>
+        <button class="button" onclick="showPopup('calculator')">📱 Calculator</button>
+        <button class="button" onclick="showPopup('settings')">⚙️ Settings</button>
+        <button class="button" onclick="window.open('https://www.google.com', '_blank')">🛜 Web Browser</button>
+        <button class="button" onclick="showPopup('about')">ℹ️ About</button>
+    </div>
+
+
+    <div id="calculator" class="popup">
+        <button class="close" onclick="closePopup('calculator')">X</button>
+        <h3>Calculator</h3>
+        <input type="number" id="num1"> <br />
+        <input type="number" id="num2"> <br />
+        <button class="button" onclick="calculate('+')">+</button>
+        <button class="button" onclick="calculate('-')">-</button>
+        <button class="button" onclick="calculate('*')">*</button>
+        <button class="button" onclick="calculate('/')">/</button> <br />
+        <p id="calcResult"></p>
+    </div>
+
+    <div id="settings" class="popup">
+        <button class="close" onclick="closePopup('settings')">X</button>
+        <h3>Settings</h3>
+        <button class="button" onclick="changeBackground()">Change Background</button> <br />
+        <button class="button" onclick="toggleTheme()">Change Theme</button> <br />
+    </div>
+    
+    <div id="about" class="popup">
+        <button class="close" onclick="closePopup('about')">X</button>
+        <img src="Assets/ico.png" alt="cat os" class="ico">
+        <h3>Cat OS Web</h3>
+        <p>An OS designed in your web browser</p>
+        <p>Version: V1.1</p>
+        <p>NOTE: Currently not optimized for mobile screens yet.</p>
+        <a href="https://ak-dev.is-a.dev" target="_blank">Created by: AK Dev</a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
