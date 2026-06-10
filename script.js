@@ -26,10 +26,10 @@ function calculate(op) {
 }
 function changeBackground() {
     let body = document.body;
-    if (body.style.backgroundImage === 'url("Assets/1.png")') {
-        body.style.backgroundImage = 'url("Assets/2.png")';
+    if (body.classList.contains("bdtwo")) {
+        body.classList.remove("bdtwo");
     } else {
-        body.style.backgroundImage = 'url("Assets/1.png")';
+        body.classList.add("bdtwo");
     }
 }
 function toggleTheme() {
@@ -39,3 +39,32 @@ function toggleTheme() {
         popup.style.color = document.body.classList.contains('dark-theme') ? 'white' : 'black';
     });
 }
+
+let highestZ = 1;
+
+document.querySelectorAll('.popup').forEach(windowE1 => {
+    const titlebar = windowE1.querySelector('.titlebar');
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    titlebar.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        offsetX = e.clientX - windowE1.offsetLeft;
+        offsetY = e.clientY - windowE1.offsetTop;
+        highestZ++;
+        windowE1.style.zIndex = highestZ
+        titlebar.style.cursor = 'grabbing';
+    });
+    document.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        windowE1.style.left = (e.clientX - offsetX) + 'px';
+        windowE1.style.top = (e.clientY - offsetY) + 'px';
+    });
+
+    document.addEventListener('pointerup', () => {
+        dragging = false;
+        titlebar.style.cursor = 'grab';
+    });
+});

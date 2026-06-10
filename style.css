@@ -1,4 +1,4 @@
-.bdone {--bd: url("Assets/1.png");}
+:root {--bd: url("Assets/1.png");}
 .bdtwo {--bd: url("Assets/2.png");}
 
 body {
@@ -33,14 +33,14 @@ body {
     transition: bottom 0.3s ease-in-out;
 }
 .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    transform: none;
     width: 300px;
     background: white;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     display: none;
     text-align: center;
@@ -88,7 +88,7 @@ body {
     color: white;
 }
 .close {
-    margin-left: 90%;
+    margin-left: 9%;
     border-radius: 50%;
     background-color: red;
     border: 1px solid black;
@@ -101,6 +101,22 @@ body {
 a {color: rgb(0, 173, 173);}
 #num1 {margin-bottom: 5px;}
 .ico {width: 200px;}
+
+.titlebar {
+    background: #007BFF;
+    color: white;
+    padding: 8px;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    margin: -15px -15px 10px -15px;
+    border-radius: 15px 15px 0 0;
+}
+.titlebar.grabbing {
+    cursor: grabbing;
+}
 
 @media screen and (max-width: 800px){
     .btn {
@@ -117,6 +133,8 @@ a {color: rgb(0, 173, 173);}
         width: 24%;
         margin-right: 76%;
     }
+    :root {--bd: url("Assets/1-m.png");}
+    .bdtwo {--bd: url("Assets/2-m.png");}
 }
 body {
     background-color: black;
