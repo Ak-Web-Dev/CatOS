@@ -10,6 +10,7 @@ function toggleStartMenu() {
 }
 function showPopup(id) {
     document.getElementById(id).style.display = 'block';
+    document.getElementById(id).style.visibility = 'visible';
 }
 function closePopup(id) {
     document.getElementById(id).style.display = 'none';
