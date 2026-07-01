@@ -3,28 +3,21 @@ let highestZIndex = 1050;
 function makeWindowDraggable(windowEl) {
     const header = windowEl.querySelector('.window-header');
     if (!header) return;
-
     let currentX = windowEl.id === 'settings' ? 420 : 100;
     let currentY = 100;
-
     let startX = 0;
     let startY = 0;
-
     windowEl.style.transform = `translate(${currentX}px, ${currentY}px)`;
-
     header.onmousedown = dragMouseDown;
 
     function dragMouseDown(e) {
         e = e || window.event;
         if (e.target.closest('.close')) return;
         e.preventDefault();
-
         highestZIndex++;
         windowEl.style.zIndex = highestZIndex;
-
         startX = e.clientX;
         startY = e.clientY;
-
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
     }
@@ -32,16 +25,12 @@ function makeWindowDraggable(windowEl) {
     function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
-
         let deltaX = e.clientX - startX;
         let deltaY = e.clientY - startY;
-
         startX = e.clientX;
         startY = e.clientY;
-
         currentX += deltaX;
         currentY += deltaY;
-
         windowEl.style.transform = `translate(${currentX}px, ${currentY}px)`;
     }
 
@@ -54,7 +43,6 @@ function makeWindowDraggable(windowEl) {
 function updateTaskbarIndicators() {
     let activeWindowId = null;
     let maxZ = -1;
-
     const popups = document.querySelectorAll('.popup');
     popups.forEach(popup => {
         if (popup.style.display === 'block') {
@@ -69,7 +57,6 @@ function updateTaskbarIndicators() {
     popups.forEach(popup => {
         const btn = document.getElementById('btn-' + popup.id);
         if (!btn) return;
-
         if (popup.style.display === 'block') {
             if (popup.id === activeWindowId) {
                 btn.classList.add('active-window');
@@ -88,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const popups = document.querySelectorAll('.popup');
     popups.forEach(popup => {
         makeWindowDraggable(popup);
-        
         popup.addEventListener('mousedown', () => {
             highestZIndex++;
             popup.style.zIndex = highestZIndex
