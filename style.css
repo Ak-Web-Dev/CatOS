@@ -16,10 +16,14 @@ body {
     display: flex;
     gap: 10px;
 }
+.apps-container button {padding-bottom: 8px;}
 .navbar .container-fluid {
     position: relative;
     display: flex;
     align-items: center;
+}
+.offcanvas button {
+    margin: 5px;
 }
 
 .close {
@@ -38,11 +42,14 @@ body {
 }
 
 .popup {
-    position: absolute;
+    position: absolute !important;
     display: none;
     text-align: center;
     width: 18rem;
     box-sizing: border-box;
+    top: 0;
+    left: 0;
+    visibility: hidden;
 }
 .card-body {
     padding: 10px;
@@ -66,4 +73,23 @@ body {
 .window-header {
     cursor: move;
     user-select: none;
+}
+
+.indicator-line {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 2px;
+    background-color: rgb(71, 166, 255);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+.app.active-window .indicator-line {
+    width: 70%;
+}
+.app.background-window .indicator-line {
+    width: 15%;
+    background-color: rgb(165, 165, 165);
 }

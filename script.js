@@ -1,8 +1,17 @@
 let highestZIndex = 1050;
+
 function makeWindowDraggable(windowEl) {
     const header = windowEl.querySelector('.window-header');
     if (!header) return;
-    let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+
+    let currentX = windowEl.id === 'settings' ? 420 : 100;
+    let currentY = 100;
+
+    let startX = 0;
+    let startY = 0;
+
+    windowEl.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
     header.onmousedown = dragMouseDown;
 
     function dragMouseDown(e) {
@@ -12,8 +21,9 @@ function makeWindowDraggable(windowEl) {
 
         highestZIndex++;
         windowEl.style.zIndex = highestZIndex;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+
+        startX = e.clientX;
+        startY = e.clientY;
 
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
@@ -23,45 +33,84 @@ function makeWindowDraggable(windowEl) {
         e = e || window.event;
         e.preventDefault();
 
-        posX = mouseX - e.clientX;
-        posY = mouseY - e.clientY;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        windowEl.style.top = (windowEl.offsetTop - posY) + "px";
-        windowEl.style.left = (windowEl.offsetLeft - posX) + "px";
+        let deltaX = e.clientX - startX;
+        let deltaY = e.clientY - startY;
+
+        startX = e.clientX;
+        startY = e.clientY;
+
+        currentX += deltaX;
+        currentY += deltaY;
+
+        windowEl.style.transform = `translate(${currentX}px, ${currentY}px)`;
     }
+
     function closeDragElement() {
         document.onmouseup = null;
         document.onmousemove = null;
     }
 }
 
-document.addEventListener ("DOMContentLoaded", () => {
+function updateTaskbarIndicators() {
+    let activeWindowId = null;
+    let maxZ = -1;
+
+    const popups = document.querySelectorAll('.popup');
+    popups.forEach(popup => {
+        if (popup.style.display === 'block') {
+            let z = parseInt(popup.style.zIndex) || 0;
+            if (z > maxZ) {
+                maxZ = z;
+                activeWindowId = popup.id;
+            }
+        }
+    });
+    
+    popups.forEach(popup => {
+        const btn = document.getElementById('btn-' + popup.id);
+        if (!btn) return;
+
+        if (popup.style.display === 'block') {
+            if (popup.id === activeWindowId) {
+                btn.classList.add('active-window');
+                btn.classList.remove('background-window');
+            } else {
+                btn.classList.remove('active-window');
+                btn.classList.add('background-window');
+            }
+        } else {
+            btn.classList.remove('active-window', 'background-window');
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
     const popups = document.querySelectorAll('.popup');
     popups.forEach(popup => {
         makeWindowDraggable(popup);
+        
         popup.addEventListener('mousedown', () => {
             highestZIndex++;
-            popup.style.zIndex = highestZIndex;
+            popup.style.zIndex = highestZIndex
+            updateTaskbarIndicators();
         });
     });
 });
 
 function showPopup(id) {
     const popup = document.getElementById(id);
-    popup.style.display = 'block'; 
+    popup.style.display = 'block';
+    popup.style.visibility = 'visible';
+    popup.style.position = 'absolute';
 
-    if (!popup.style.top) {
-        popup.style.top = "100px";
-    }
-    if (!popup.style.left) {
-        popup.style.left = id === 'settings' ? "420px" : "100px"; 
-    }
     highestZIndex++;
     popup.style.zIndex = highestZIndex;
+    updateTaskbarIndicators();
 }
+
 function closePopup(id) {
     document.getElementById(id).style.display = 'none';
+    updateTaskbarIndicators();
 }
 
 function calculate(op) {
@@ -73,21 +122,4 @@ function calculate(op) {
     else if (op === '*') result = num1 * num2;
     else if (op === '/') result = num1 / num2;
     document.getElementById('calcResult').innerText = 'Result: ' + result;
-}
-
-function changeBackground() {
-    let body = document.body;
-    if (body.classList.contains("bdtwo")) {
-        body.classList.remove("bdtwo");
-    } else {
-        body.classList.add("bdtwo");
-    }
-}
-
-function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    document.querySelectorAll('.popup').forEach(popup => {
-        popup.style.backgroundColor = document.body.classList.contains('dark-theme') ? 'black' : 'white';
-        popup.style.color = document.body.classList.contains('dark-theme') ? 'white' : 'black';
-    });
 }
