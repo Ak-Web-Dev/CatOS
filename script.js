@@ -1,20 +1,69 @@
-function toggleStartMenu() {
-    let menu = document.getElementById('startMenu');
-    if (menu.style.bottom === '90px') {
-        menu.style.bottom = '-300px';
-        setTimeout(() => menu.style.display = 'none', 300);
-    } else {
-        menu.style.display = 'block';
-        setTimeout(() => menu.style.bottom = '90px', 10);
+let highestZIndex = 1050;
+function makeWindowDraggable(windowEl) {
+    const header = windowEl.querySelector('.window-header');
+    if (!header) return;
+    let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+    header.onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        if (e.target.closest('.close')) return;
+        e.preventDefault();
+
+        highestZIndex++;
+        windowEl.style.zIndex = highestZIndex;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+
+        posX = mouseX - e.clientX;
+        posY = mouseY - e.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        windowEl.style.top = (windowEl.offsetTop - posY) + "px";
+        windowEl.style.left = (windowEl.offsetLeft - posX) + "px";
+    }
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
     }
 }
+
+document.addEventListener ("DOMContentLoaded", () => {
+    const popups = document.querySelectorAll('.popup');
+    popups.forEach(popup => {
+        makeWindowDraggable(popup);
+        popup.addEventListener('mousedown', () => {
+            highestZIndex++;
+            popup.style.zIndex = highestZIndex;
+        });
+    });
+});
+
 function showPopup(id) {
-    document.getElementById(id).style.display = 'block';
-    document.getElementById(id).style.visibility = 'visible';
+    const popup = document.getElementById(id);
+    popup.style.display = 'block'; 
+
+    if (!popup.style.top) {
+        popup.style.top = "100px";
+    }
+    if (!popup.style.left) {
+        popup.style.left = id === 'settings' ? "420px" : "100px"; 
+    }
+    highestZIndex++;
+    popup.style.zIndex = highestZIndex;
 }
 function closePopup(id) {
     document.getElementById(id).style.display = 'none';
 }
+
 function calculate(op) {
     let num1 = parseFloat(document.getElementById('num1').value);
     let num2 = parseFloat(document.getElementById('num2').value);
@@ -25,6 +74,7 @@ function calculate(op) {
     else if (op === '/') result = num1 / num2;
     document.getElementById('calcResult').innerText = 'Result: ' + result;
 }
+
 function changeBackground() {
     let body = document.body;
     if (body.classList.contains("bdtwo")) {
@@ -33,6 +83,7 @@ function changeBackground() {
         body.classList.add("bdtwo");
     }
 }
+
 function toggleTheme() {
     document.body.classList.toggle('dark-theme');
     document.querySelectorAll('.popup').forEach(popup => {
@@ -40,32 +91,3 @@ function toggleTheme() {
         popup.style.color = document.body.classList.contains('dark-theme') ? 'white' : 'black';
     });
 }
-
-let highestZ = 1;
-
-document.querySelectorAll('.popup').forEach(windowE1 => {
-    const titlebar = windowE1.querySelector('.titlebar');
-
-    let dragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    titlebar.addEventListener('pointerdown', (e) => {
-        dragging = true;
-        offsetX = e.clientX - windowE1.offsetLeft;
-        offsetY = e.clientY - windowE1.offsetTop;
-        highestZ++;
-        windowE1.style.zIndex = highestZ
-        titlebar.style.cursor = 'grabbing';
-    });
-    document.addEventListener('pointermove', (e) => {
-        if (!dragging) return;
-        windowE1.style.left = (e.clientX - offsetX) + 'px';
-        windowE1.style.top = (e.clientY - offsetY) + 'px';
-    });
-
-    document.addEventListener('pointerup', () => {
-        dragging = false;
-        titlebar.style.cursor = 'grab';
-    });
-});
