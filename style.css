@@ -1,5 +1,5 @@
 body {
-    background-image: url(Assets/2.png);
+    background-image: url(Assets/bd1.jpg);
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -8,6 +8,10 @@ body {
 }
 .navbar a{
     color: white;
+}
+.navbar img {
+    width: 60px;
+    border-radius: 10%;
 }
 .apps-container {
     position: absolute;
@@ -93,3 +97,30 @@ body {
     width: 15%;
     background-color: rgb(165, 165, 165);
 }
+
+.minimize {
+    background-color: rgb(255, 166, 0);
+    border-radius: 50%;
+    border: none;
+    transition: 0.1s;
+    margin-bottom: 2px;
+    margin-right: -90px !important;
+}
+.minimize:hover {background-color: rgb(202, 131, 0);}
+
+.popup iframe {
+    pointer-events: auto;
+}
+.window-header:active ~ .card-body iframe {
+    pointer-events: none;
+}
+
+.minimize2 {
+    background-color: rgb(255, 166, 0);
+    border-radius: 50%;
+    border: none;
+    transition: 0.1s;
+    margin-bottom: 6px !important;
+    margin-right: -420px !important;
+}
+.minimize2:hover {background-color: rgb(202, 131, 0);}

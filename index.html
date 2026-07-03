@@ -14,12 +14,15 @@
     <!--TaskBar-->
     <nav class="navbar fixed-bottom bg-dark">
       <div class="container-fluid">
-        <a class="btn btn-outline-primary" data-bs-toggle="offcanvas" href="#start" role="button" aria-controls="start">MAK OS</a>
+        <a class="btn btn-dark" data-bs-toggle="offcanvas" href="#start" role="button" aria-controls="start"><img src="Assets/start.png"></a>
         <div class="apps-container">
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-calculator" onclick="showPopup('calculator')">Calculator <span class="indicator-line"></span></button>
-          <button class="app btn btn-outline-light" onclick="window.open('https://www.google.com', '_blank')">Web Browser</button>
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-settings" onclick="showPopup('settings')">Settings <span class="indicator-line"></span></button>
+          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-calculator" onclick="showPopup('calculator')">📱 Calculator <span class="indicator-line"></span></button>
+          <button class="app btn btn-outline-light" onclick="window.open('https://www.google.com', '_blank')">🌐 Web Browser</button>
+          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-settings" onclick="showPopup('settings')">⚙️ Settings <span class="indicator-line"></span></button>
+          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-app1" onclick="showPopup('app1')">Web App 1 <span class="indicator-line"></span></button>
+          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-app2" onclick="showPopup('app2')">Web App 2 <span class="indicator-line"></span></button>
         </div>
+        <span class="navbar-text text-light fw-bold px-3">🕙| <span id="taskbar-clock"></span></span>
       </div>
     </nav>
 
@@ -38,7 +41,8 @@
     <!--Calculator-->
     <div class="card popup" id="calculator" style="width: 18rem">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
-        <span><b>Calculator</b></span>
+        <span><b>📱 Calculator</b></span>
+        <button class="minimize" onclick="minimizePopup('calculator')">__</button>
         <button class="close" onclick="closePopup('calculator')">✕</button>
       </div>
 
@@ -56,11 +60,47 @@
     <!--Settings-->
     <div class="card popup" id="settings" style="width: 18rem">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
-        <span><b>Settings</b></span>
+        <span><b>⚙️ Settings</b></span>
+        <button class="minimize" onclick="minimizePopup('settings')">__</button>
         <button class="close" onclick="closePopup('settings')">✕</button>
       </div>
       <div class="card-body">
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <button class="btn btn-primary" onclick="changebd()">Switch Wallpaper</button><hr>
+        <label class="form-label fw-bold small text-start d-block mb-1">Web App (1) URL:</label>
+        <div class="input-group mb-2">
+          <input type="text" id="url1-input" class="form-control" value="https://wikipedia.org" style="margin-bottom: 0 !important;">
+          <button class="btn btn-primary" onclick="updateBrowserUrl()">Go</button>
+        </div>
+        <label class="form-label fw-bold small text-start d-block mb-1">Web App (2) URL:</label>
+        <div class="input-group mb-2">
+          <input type="text" id="url2-input" class="form-control" value="https://wikipedia.org" style="margin-bottom: 0 !important;">
+          <button class="btn btn-primary" onclick="updateBrowserUrl2()">Go</button>
+        </div>
+        <p class="text-muted d-block text-start" style="font-size: 11px;">Note: Some websites (like Google/YouTube) block themselves from being embedded.</p>
+      </div>
+    </div>
+
+    <!--Web App 1-->
+    <div class="card popup" id="app1" style="width: 45rem; height: 35rem;">
+      <div class="card-header window-header d-flex justify-content-between align-items-center">
+        <span><b>🌐 Web Viewer App (1)</b></span>
+        <button class="minimize2" onclick="minimizePopup('app1')">__</button>
+        <button class="close" onclick="closePopup('app1')">✕</button>
+      </div>
+      <div class="card-body p-0" style="height: calc(100% - 40px);">
+        <iframe src="https://wikipedia.org" style="width: 100%; height: 100%; border: none; border-radius: 0 0 5px 5px;"></iframe>
+      </div>
+    </div>
+
+    <!--Web App 2-->
+    <div class="card popup" id="app2" style="width: 45rem; height: 35rem;">
+      <div class="card-header window-header d-flex justify-content-between align-items-center">
+        <span><b>🌐 Web Viewer App (2)</b></span>
+        <button class="minimize2" onclick="minimizePopup('app2')">__</button>
+        <button class="close" onclick="closePopup('app2')">✕</button>
+      </div>
+      <div class="card-body p-0" style="height: calc(100% - 40px);">
+        <iframe src="https://wikipedia.org" style="width: 100%; height: 100%; border: none; border-radius: 0 0 5px 5px;"></iframe>
       </div>
     </div>
 

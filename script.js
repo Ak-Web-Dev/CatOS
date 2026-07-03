@@ -45,7 +45,7 @@ function updateTaskbarIndicators() {
     let maxZ = -1;
     const popups = document.querySelectorAll('.popup');
     popups.forEach(popup => {
-        if (popup.style.display === 'block') {
+        if (popup.style.display === 'block' && popup.getAttribute('data-minimized') !== 'true') {
             let z = parseInt(popup.style.zIndex) || 0;
             if (z > maxZ) {
                 maxZ = z;
@@ -57,8 +57,10 @@ function updateTaskbarIndicators() {
     popups.forEach(popup => {
         const btn = document.getElementById('btn-' + popup.id);
         if (!btn) return;
-        if (popup.style.display === 'block') {
-            if (popup.id === activeWindowId) {
+        const isVisible = popup.style.display === 'block';
+        const isMinimized = popup.getAttribute('data-minimized') === 'true'
+        if (isVisible || isMinimized) {
+            if (popup.id === activeWindowId && !isMinimized) {
                 btn.classList.add('active-window');
                 btn.classList.remove('background-window');
             } else {
@@ -71,7 +73,25 @@ function updateTaskbarIndicators() {
     });
 }
 
+function startTaskbarClock() {
+    const clockEl = document.getElementById('taskbar-clock');if (!clockEl) return;
+    function updateClock() {
+        const now = new Date();
+
+        clockEl.innerText = now.toLocaleTimeString([], {
+           hour: '2-digit',
+           minute: '2-digit',
+           second: '2-digit',
+           hour12: true
+        });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    startTaskbarClock();
+
     const popups = document.querySelectorAll('.popup');
     popups.forEach(popup => {
         makeWindowDraggable(popup);
@@ -85,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showPopup(id) {
     const popup = document.getElementById(id);
+    popup.removeAttribute('data-minimized');
     popup.style.display = 'block';
     popup.style.visibility = 'visible';
     popup.style.position = 'absolute';
@@ -93,9 +114,18 @@ function showPopup(id) {
     popup.style.zIndex = highestZIndex;
     updateTaskbarIndicators();
 }
+function minimizePopup(id) {
+    const popup = document.getElementById(id);
+    popup.setAttribute('data-minimized', 'true');
+    popup.style.display = 'none';
+    updateTaskbarIndicators();
+}
 
 function closePopup(id) {
-    document.getElementById(id).style.display = 'none';
+    const popupEl = document.getElementById(id);
+    if (!popupEl) return;
+    popupEl.removeAttribute('data-minimized');
+    popupEl.style.display = 'none';
     updateTaskbarIndicators();
 }
 
@@ -108,4 +138,46 @@ function calculate(op) {
     else if (op === '*') result = num1 * num2;
     else if (op === '/') result = num1 / num2;
     document.getElementById('calcResult').innerText = 'Result: ' + result;
+}
+
+const wallpapers = [
+    'url(Assets/bd1.jpg)',
+    'url(Assets/bd2.jpg)',
+    'url(Assets/bd3.png)',
+    'url(Assets/bd4.jpg)'
+];
+
+let currentWallpaperIndex = 1;
+function changebd() {
+    currentWallpaperIndex++;
+    if (currentWallpaperIndex >= wallpapers.length) {
+        currentWallpaperIndex = 0;
+    }
+    document.body.style.backgroundImage = wallpapers[currentWallpaperIndex];
+}
+
+function updateBrowserUrl() {
+    let Url1 = document.getElementById('url1-input').value.trim();
+    const app1 = document.getElementById('app1');
+    const iframe1 = app1.querySelector('iframe');
+    if (!iframe1) return;
+
+    if (Url1 && !/^https?:\/\//i.test(Url1)) {
+        Url1 = 'https://' + Url1;
+        document.getElementById('url1-input').value = Url1
+    }
+    iframe1.src = Url1;
+}
+
+function updateBrowserUrl2() {
+    let Url2 = document.getElementById('url2-input').value.trim();
+    const app2 = document.getElementById('app2');
+    const iframe2 = app2.querySelector('iframe');
+    if (!iframe2) return;
+
+    if (Url2 && !/^https?:\/\//i.test(Url2)) {
+        Url2 = 'https://' + Url2;
+        document.getElementById('url2-input').value = Url2
+    }
+    iframe2.src = Url2;
 }
