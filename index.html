@@ -10,17 +10,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"crossorigin="anonymous"/>
   </head>
   <body>
+    <!--Welcom Screen-->
+    <div id="welcome-screen">
+      <div class="welcome-content">
+        <h1>Welcome to MAK.OS</h1>
+        <input type="text" id="user-input" class="form-control mb-3" placeholder="Enter your Username">
+        <button class="btn btn-primary btn-lg" onclick="login()">Log In</button>
+      </div>
+    </div>
+
+    <!--Sleep Screen-->
+    <div id="sleep-screen"><h5>🌙</h5></div>
 
     <!--TaskBar-->
     <nav class="navbar fixed-bottom bg-dark">
       <div class="container-fluid">
         <a class="btn btn-dark" data-bs-toggle="offcanvas" href="#start" role="button" aria-controls="start"><img src="Assets/start.png"></a>
         <div class="apps-container">
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-calculator" onclick="showPopup('calculator')">📱 Calculator <span class="indicator-line"></span></button>
-          <button class="app btn btn-outline-light" onclick="window.open('https://www.google.com', '_blank')">🌐 Web Browser</button>
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-settings" onclick="showPopup('settings')">⚙️ Settings <span class="indicator-line"></span></button>
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-app1" onclick="showPopup('app1')">Web App 1 <span class="indicator-line"></span></button>
-          <button class="app btn btn-outline-light d-flex flex-column align-items-center position-relative" id="btn-app2" onclick="showPopup('app2')">Web App 2 <span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-calculator" onclick="showPopup('calculator')"><h4>📱</h4><span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-app3" onclick="showPopup('app3')"><h4>🌐</h4><span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-settings" onclick="showPopup('settings')"><h4>⚙️</h4><span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-app1" onclick="showPopup('app1')"><h4>1️⃣</h4><span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-app2" onclick="showPopup('app2')"><h4>2️⃣</h4><span class="indicator-line"></span></button>
+          <button class="app btn btn-dark flex-column align-items-center position-relative" id="btn-info" onclick="showPopup('info')"><h4>ℹ️</h4><span class="indicator-line"></span></button>
         </div>
         <span class="navbar-text text-light fw-bold px-3">🕙| <span id="taskbar-clock"></span></span>
       </div>
@@ -33,13 +45,25 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <h4>MAK_OS made by AK Dev is a WebOS in your browser! Just for fun.</h4><hr>
-        <h4><button class="btn btn-outline-danger">Logout</button><button class="btn btn-outline-warning">Sleep</button></h4>
+        <h3>Welcome, <u><span  id="start-user">Guest</span></u>!</h3><hr />
+        <h4>MAK_OS made by AK Dev is a WebOS in your browser! Just for fun.</h4>
+        <h4>For best experience, use in full screen mode by pressing "F11 for Windows".</h4><hr>
+        <h4><button class="btn btn-outline-danger" onclick="logout()">Logout</button><button class="btn btn-outline-warning" onclick="sleep()">Sleep</button></h4>
       </div>
     </div>
 
+    <!--Desktop Icons-->
+    <div class="bdicons-container">
+      <button class="btn btn-dark" onclick="showPopup('calculator')"><h2>📱</h2><br>Calculator</button>
+      <button class="btn btn-dark" onclick="showPopup('app3')"><h2>🌐</h2><br>Browser</button><br />
+      <button class="btn btn-dark" onclick="showPopup('settings')"><h2>⚙️</h2><br>Settings</button>
+      <button class="btn btn-dark" onclick="showPopup('app1')"><h2>1️⃣</h2>App 1</button><br />
+      <button class="btn btn-dark" onclick="showPopup('app2')"><h2>2️⃣</h2>App 2</button>
+      <button class="btn btn-dark" onclick="showPopup('info')"><h2>ℹ️</h2>About</button>
+    </div>
+
     <!--Calculator-->
-    <div class="card popup" id="calculator" style="width: 18rem">
+    <div class="card popup" id="calculator" style="width: 18rem"  data-bs-theme="dark">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
         <span><b>📱 Calculator</b></span>
         <button class="minimize" onclick="minimizePopup('calculator')">__</button>
@@ -58,7 +82,7 @@
     </div>
 
     <!--Settings-->
-    <div class="card popup" id="settings" style="width: 18rem">
+    <div class="card popup" id="settings" style="width: 18rem"  data-bs-theme="dark">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
         <span><b>⚙️ Settings</b></span>
         <button class="minimize" onclick="minimizePopup('settings')">__</button>
@@ -81,7 +105,7 @@
     </div>
 
     <!--Web App 1-->
-    <div class="card popup" id="app1" style="width: 45rem; height: 35rem;">
+    <div class="card popup" id="app1" style="width: 45rem; height: 35rem;" data-bs-theme="dark">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
         <span><b>🌐 Web Viewer App (1)</b></span>
         <button class="minimize2" onclick="minimizePopup('app1')">__</button>
@@ -93,7 +117,7 @@
     </div>
 
     <!--Web App 2-->
-    <div class="card popup" id="app2" style="width: 45rem; height: 35rem;">
+    <div class="card popup" id="app2" style="width: 45rem; height: 35rem;" data-bs-theme="dark">
       <div class="card-header window-header d-flex justify-content-between align-items-center">
         <span><b>🌐 Web Viewer App (2)</b></span>
         <button class="minimize2" onclick="minimizePopup('app2')">__</button>
@@ -103,6 +127,36 @@
         <iframe src="https://wikipedia.org" style="width: 100%; height: 100%; border: none; border-radius: 0 0 5px 5px;"></iframe>
       </div>
     </div>
+
+
+    <!--Browser-->
+    <div class="card popup" id="app3" style="width: 45rem; height: 35rem;" data-bs-theme="dark">
+      <div class="card-header window-header d-flex justify-content-between align-items-center">
+        <span><b>🌐 Browser</b></span>
+        <button class="minimize2" onclick="minimizePopup('app3')">__</button>
+        <button class="close" onclick="closePopup('app3')">✕</button>
+      </div>
+      <div class="card-body p-0" style="height: calc(100% - 40px);">
+        <iframe src="https://ak-web-dev.github.io/mak_tab/" style="width: 100%; height: 100%; border: none; border-radius: 0 0 5px 5px;"></iframe>
+      </div>
+    </div>
+
+    <!--About-->
+    <div class="card popup" id="info" style="width: 18rem" data-bs-theme="dark">
+      <div class="card-header window-header d-flex justify-content-between align-items-center">
+        <span><b>ℹ️ About</b></span>
+        <button class="minimize" onclick="minimizePopup('info')">__</button>
+        <button class="close" onclick="closePopup('info')">✕</button>
+      </div>
+      <div class="card-body">
+        <img src="Assets/logo.png" class="card-img-top" style="border-radius: 14px;"><hr />
+        <h6>MAK.OS, created by <a href="https://ak-dev.is-a.dev" target="_blank">AK Dev</a>, is a just-for-fun OS that is designed to fit into your Web.</h6>
+        <h6>We beleive the new era of computing is on the web, but for now, this project is just for <a href="https://stardance.hackclub.com" target="_blank">Stardance <small style="font-size: x-small;">by Hackclub</small></a> WebOS Mission Project!</h6>
+        <h6>View the Project at <a href="https://stardance.hackclub.com/projects/14824">Stardance</a> And don't forget to follow the project!</h6>
+        <h6>Source Code at: <a href="https://github.com/Ak-Web-Dev/CatOS">GitHub</a></h6>
+      </div>
+    </div>
+
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"crossorigin="anonymous"></script>

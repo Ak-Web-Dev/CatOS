@@ -105,6 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showPopup(id) {
     const popup = document.getElementById(id);
+    const taskbarBtn = document.getElementById("btn-" + id);
+    if (taskbarBtn) {
+        taskbarBtn.style.display = "flex";
+    }
+
     popup.removeAttribute('data-minimized');
     popup.style.display = 'block';
     popup.style.visibility = 'visible';
@@ -126,6 +131,11 @@ function closePopup(id) {
     if (!popupEl) return;
     popupEl.removeAttribute('data-minimized');
     popupEl.style.display = 'none';
+
+    const taskbarBtn = document.getElementById("btn-" + id);
+    if (taskbarBtn) {
+        taskbarBtn.style.display = "none";
+    }
     updateTaskbarIndicators();
 }
 
@@ -181,3 +191,49 @@ function updateBrowserUrl2() {
     }
     iframe2.src = Url2;
 }
+
+function login() {
+    const username = document.getElementById("user-input").value.trim();
+    document.getElementById("start-user").textContent = username || "Guest";
+
+    const screen = document.getElementById("welcome-screen");
+    screen.classList.add("hide");
+    setTimeout(() => {
+        screen.style.display = "none";
+    }, 800);
+}
+
+function logout() {
+    document.getElementById("user-input").value = "";
+    document.getElementById("start-user").textContent = "Guest";
+
+    const startMenu = document.getElementById("start");
+    const offcanvas = bootstrap.Offcanvas.getInstance(startMenu);
+    if (offcanvas) {
+        offcanvas.hide();
+    }
+
+    document.querySelectorAll(".popup").forEach(popup => {
+        popup.style.display = "none";
+        popup.removeAttribute("data-minimized");
+    });
+
+    document.querySelectorAll(".apps-container .app").forEach(btn => {
+        btn.style.display = "none";
+        btn.classList.remove("active-window", "background-window");
+    });
+
+    const screen = document.getElementById("welcome-screen");
+    screen.style.display = "flex";
+    void screen.offsetWidth;
+    screen.classList.remove("hide");
+}
+
+const sleeper = document.getElementById("sleep-screen");
+function sleep() {
+    sleeper.style.visibility = "visible";
+}
+
+sleeper.addEventListener("click", function() {
+    sleeper.style.visibility = "hidden";
+});
