@@ -57,7 +57,7 @@
 <hr />
 
 <h2><u>Screenshots</u></h2>
-<img src="Assets/Screenshot (16).png" />
+<img src="Assets/Screenshot (16).webp" />
 <img src="Assets/logo.png" />
 
 <hr />
