@@ -57,8 +57,8 @@
 <hr />
 
 <h2><u>Screenshots</u></h2>
-<image href="Assets/Screenshot (16).png" />
-<image href="Assets/logo.png" />
+<img src="Assets/Screenshot (16).png" />
+<img src="Assets/logo.png" />
 
 <hr />
 
