@@ -1,54 +1,29 @@
 <p>CatOS is now MAK.OS!</p>
 <h1>MAK.OS</h1>
 
-<p><b>MAK.OS</b> is a web-based desktop operating system experience built with HTML, CSS, and JavaScript. It is an experimental project that recreates the look and feel of a modern desktop environment directly inside a web browser.</p>
-
-<p>This project is <b>not a real operating system</b>, but it demonstrates how web technologies can simulate desktop-style computing, including movable windows, a taskbar, desktop icons, applications, and more.</p>
+<p>MAK.OS is a web based OS that runs in your web browser! It does not has anything to do as a real operating system but it showcases that elements like draggable windows, apps, login system are possible to fit in a website.</p>
 
 <hr />
 
 <h2><u>Features</u></h2>
 
-<p>🪟 Fully functional window-grabbing system built with JavaScript.</p>
-<p>📌 Taskbar with active window indicators inspired by Windows 11.</p>
-<p>🕒 Live clock in the taskbar.</p>
-<p>🌐 Two configurable WebViewer apps that can display websites.</p>
-<p>🖼️ Multiple wallpapers selectable through the Settings app.</p>
-<p>👤 Login screen with logout and sleep functionality.</p>
-<p>🙋 Username displayed in the Start Menu.</p>
-<p>🌍 Built-in web browser powered by my MAK_Tab project.</p>
-<p>🖥️ Desktop icons.</p>
-<p>✨ Smooth animations and desktop-like user experience.</p>
+<p>-> A window grabbing system from JS.</p>
+<p>-> Taskbar with indicatores like win11.</p>
+<p>-> Taskbar clock.</p>
+<p>-> Two Webviewer apps with editable urls via settings.</p>
+<p>-> A few nice wallpapers you can switch through settings.</p>
+<p>-> Login screen with username input which is carried on to start menu.</p>
+<p>-> Web Browser app made possible with my very own MAK_Tab project via iframes tag in html.</p>
+<p>-> App icons on desktop.</p>
 
 <hr />
 
-<h2><u>Tech Stack</u></h2>
-
-<p>• HTML5</p>
-<p>• CSS3</p>
-<p>• Vanilla JavaScript (ES6)</p>
-
-<p>All desktop functionality, including the window management system, was built from scratch using JavaScript.</p>
+<h2><u>Made with:</u></h2>
+<p>Only HTML, CSS, and JS</p>
 
 <hr />
 
-<h2><u>Running Locally</u></h2>
-
-<p>1. Clone the repository:</p>
-
-<pre><code>git clone https://github.com/ak-web-dev/mak.os.git</code></pre>
-
-<p>2. Open the project folder.</p>
-
-<p>3. Launch <code>index.html</code> in your browser, or use a local development server such as VS Code Live Server.</p>
-
-<hr />
-
-<h2><u>Project Goal</u></h2>
-
-<p>MAK.OS was created as a fun project to explore what can be achieved with modern web technologies. The goal is to recreate the desktop operating system experience entirely inside a web browser while keeping the project lightweight and easy to understand.</p>
-
-<hr />
+<h2><u>TestNow!</u></h2>
 
 <h2><u>Live Demo</u></h2>
 
@@ -62,9 +37,7 @@
 
 <hr />
 
-<h2><u>Author</u></h2>
 
 <p>Created by <b>AK Dev</b></p>
-<p>Follow the project on <a href="https://stardance.hackclub.com/projects/14824">Stardance!</a></p>
+<p>Follow the project on <a href="https://stardance.hackclub.com/projects/14824">Stardance!</a>, the project was made through the WebOS1 mission!</p>
 
-<p>GitHub: <a href="https://github.com/ak-web-dev">https://github.com/ak-web-dev</a></p>
